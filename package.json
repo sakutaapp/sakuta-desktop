@@ -1,0 +1,19 @@
+{
+    "name": "sakuta-desktop",
+    "version": "0.1.0",
+    "main": "build.js",
+    "repository": "https://github.com/sakutaapp/sakuta-desktop.git",
+    "author": "OfficialCRUGG <ich@crugg.de>",
+    "license": "MIT",
+    "dependencies": {
+        "create-dmg": "^5.3.0",
+        "nativefier": "^47.0.0"
+    },
+    "scripts": {
+        "build": "node build.js",
+        "create-releases": "node createReleasesFolder.js && npm run-script create-dmg && npm run-script create-zip",
+        "create-dmg": "create-dmg out/Sakuta-darwin-arm64/Sakuta.app releases; node fixM1fileName.js && create-dmg out/Sakuta-darwin-x64/Sakuta.app releases; node fixIntelFileName.js",
+        "create-zip": "cd out/Sakuta-win32-x64 && zip ../../releases/sakuta-0.1.0-win64.zip * && cd ../..",
+        "full-build": "npm run-script build && npm run-script create-releases"
+    }
+}
